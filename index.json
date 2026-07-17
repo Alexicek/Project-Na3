@@ -1,31 +1,31 @@
 {
   "schema_version": 1,
   "username": "Chessicek",
-  "last_updated": "2026-07-17T03:35:40.887531Z",
+  "last_updated": "2026-07-17T06:26:46.363405Z",
   "latest_game": {
-    "end_time": "2026-07-17T02:21:37Z",
+    "end_time": "2026-07-17T05:40:29Z",
     "date": "2026.07.17",
-    "white": "A10212003",
-    "white_rating": 1629,
+    "white": "RafaelKocha",
+    "white_rating": 1679,
     "black": "chessicek",
-    "black_rating": 1626,
+    "black_rating": 1642,
     "result": "1-0",
     "user_colour": "Black",
     "user_result": "Loss",
     "time_class": "blitz",
     "time_control": "180+2",
     "rated": true,
-    "opening": "Philidor Defense Hanham Lion Variation 5.dxe5 dxe5",
-    "url": "https://www.chess.com/game/live/171674710092",
+    "opening": "Old Indian Defense Ukrainian Variation 4.d5 Be7 5.e4",
+    "url": "https://www.chess.com/game/live/171679271606",
     "pgn": "games/latest.pgn"
   },
   "latest_na3": {
-    "end_time": "2026-07-16T17:11:20Z",
-    "date": "2026.07.16",
+    "end_time": "2026-07-17T05:00:02Z",
+    "date": "2026.07.17",
     "white": "chessicek",
     "white_rating": 1634,
-    "black": "4B768B",
-    "black_rating": 1580,
+    "black": "Luis2113",
+    "black_rating": 1611,
     "result": "1-0",
     "user_colour": "White",
     "user_result": "Win",
@@ -33,12 +33,12 @@
     "time_control": "180+2",
     "rated": true,
     "opening": "Sicilian Defense Kronberger Variation",
-    "url": "https://www.chess.com/game/live/171657931122",
+    "url": "https://www.chess.com/game/live/171678167704",
     "pgn": "na3/latest_na3.pgn"
   },
   "counts": {
     "recent_games": 20,
-    "recent_na3_games": 6
+    "recent_na3_games": 7
   },
   "files": {
     "recent_games_json": "games/latest.json",
