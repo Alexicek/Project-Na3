@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "username": "Chessicek",
+  "last_updated": "2026-07-17T00:16:18.748351Z",
+  "latest_game": {
+    "end_time": "2026-07-17T00:05:18Z",
+    "date": "2026.07.17",
+    "white": "chessicek",
+    "white_rating": 1610,
+    "black": "Ziqdif",
+    "black_rating": 1632,
+    "result": "0-1",
+    "user_colour": "White",
+    "user_result": "Loss",
+    "time_class": "blitz",
+    "time_control": "180+2",
+    "rated": true,
+    "opening": "Kings Pawn Opening Kings Knight Variation",
+    "url": "https://www.chess.com/game/live/171671738084",
+    "pgn": "games/latest.pgn"
+  },
+  "latest_na3": {
+    "end_time": "2026-07-16T17:11:20Z",
+    "date": "2026.07.16",
+    "white": "chessicek",
+    "white_rating": 1634,
+    "black": "4B768B",
+    "black_rating": 1580,
+    "result": "1-0",
+    "user_colour": "White",
+    "user_result": "Win",
+    "time_class": "blitz",
+    "time_control": "180+2",
+    "rated": true,
+    "opening": "Sicilian Defense Kronberger Variation",
+    "url": "https://www.chess.com/game/live/171657931122",
+    "pgn": "na3/latest_na3.pgn"
+  },
+  "counts": {
+    "recent_games": 20,
+    "recent_na3_games": 6
+  },
+  "files": {
+    "recent_games_json": "games/latest.json",
+    "recent_games_pgn": "games/latest.pgn",
+    "latest_na3_json": "na3/latest_na3.json",
+    "latest_na3_pgn": "na3/latest_na3.pgn",
+    "na3_history": "na3/history.json"
+  }
+}
