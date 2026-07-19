@@ -29,7 +29,7 @@ concurrency:
 jobs:
   analyse:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
 
     steps:
       - name: Check out repository
@@ -55,25 +55,28 @@ jobs:
           STOCKFISH_PATH: /usr/games/stockfish
         run: python analyse_latest.py
 
-      - name: Commit new report
+      - name: Commit generated files
         run: |
-          if git diff --quiet && git diff --cached --quiet; then
-            echo "No new report to commit."
-            exit 0
-          fi
-
           git config user.name "Project Na3 Bot"
           git config user.email "actions@users.noreply.github.com"
 
-          git add reports state.json
-          git commit -m "Analyse latest Na3 game"
+          git add reports analysis_index.json recurring_patterns.json state.json
+
+          if git diff --cached --quiet; then
+            echo "No new analysis to commit."
+            exit 0
+          fi
+
+          git commit -m "Add latest Na3 analysis"
           git push
 
-      - name: Upload report as workflow artifact
+      - name: Upload analysis artifact
         uses: actions/upload-artifact@v4
         with:
           name: project-na3-analysis
           path: |
             reports/
+            analysis_index.json
+            recurring_patterns.json
             state.json
           retention-days: 30
