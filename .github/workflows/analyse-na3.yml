@@ -1,0 +1,79 @@
+name: Analyse latest Na3 game
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Which game should be analysed?
+        required: true
+        default: latest_na3
+        type: choice
+        options:
+          - latest_na3
+          - latest_game
+      depth:
+        description: Stockfish depth
+        required: true
+        default: "18"
+
+  schedule:
+    - cron: "17 4 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: project-na3-analysis
+  cancel-in-progress: false
+
+jobs:
+  analyse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Stockfish and Python packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y stockfish
+          python -m pip install --upgrade pip
+          pip install python-chess requests
+
+      - name: Analyse game
+        env:
+          CHESSCOM_USERNAME: chessicek
+          ANALYSIS_MODE: ${{ github.event.inputs.mode || 'latest_na3' }}
+          STOCKFISH_DEPTH: ${{ github.event.inputs.depth || '18' }}
+          STOCKFISH_PATH: /usr/games/stockfish
+        run: python analyse_latest.py
+
+      - name: Commit new report
+        run: |
+          if git diff --quiet && git diff --cached --quiet; then
+            echo "No new report to commit."
+            exit 0
+          fi
+
+          git config user.name "Project Na3 Bot"
+          git config user.email "actions@users.noreply.github.com"
+
+          git add reports state.json
+          git commit -m "Analyse latest Na3 game"
+          git push
+
+      - name: Upload report as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: project-na3-analysis
+          path: |
+            reports/
+            state.json
+          retention-days: 30
