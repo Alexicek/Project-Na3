@@ -4,8 +4,10 @@ import io
 import json
 import os
 import re
+from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any
 
 import chess
 import chess.engine
@@ -18,8 +20,10 @@ MODE = os.getenv("ANALYSIS_MODE", "latest_na3")
 DEPTH = int(os.getenv("STOCKFISH_DEPTH", "18"))
 STOCKFISH_PATH = os.getenv("STOCKFISH_PATH", "/usr/games/stockfish")
 
-REPORTS_FOLDER = Path("reports")
+REPORTS_DIR = Path("reports")
 STATE_FILE = Path("state.json")
+INDEX_FILE = Path("analysis_index.json")
+PATTERNS_FILE = Path("recurring_patterns.json")
 
 HEADERS = {
     "User-Agent": "Project-Na3-Research/1.0",
@@ -27,484 +31,422 @@ HEADERS = {
 }
 
 
-def download_json(url: str) -> dict:
+def get_json(url: str) -> dict[str, Any]:
     response = requests.get(url, headers=HEADERS, timeout=30)
     response.raise_for_status()
     return response.json()
 
 
-def read_pgn(pgn_text: str) -> chess.pgn.Game:
+def parse_game(pgn_text: str) -> chess.pgn.Game:
     game = chess.pgn.read_game(io.StringIO(pgn_text))
-
     if game is None:
-        raise RuntimeError("The PGN could not be read.")
-
+        raise RuntimeError("Could not parse the Chess.com PGN.")
     return game
 
 
-def belongs_to_user(game: chess.pgn.Game) -> bool:
-    white = game.headers.get("White", "").lower()
-    black = game.headers.get("Black", "").lower()
-    username = USERNAME.lower()
+def load_json(path: Path, default: Any) -> Any:
+    if not path.exists():
+        return default
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return default
 
-    return username in {white, black}
+
+def save_json(path: Path, value: Any) -> None:
+    path.write_text(
+        json.dumps(value, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+
+
+def game_belongs_to_user(game: chess.pgn.Game) -> bool:
+    username = USERNAME.lower()
+    return username in {
+        game.headers.get("White", "").lower(),
+        game.headers.get("Black", "").lower(),
+    }
+
+
+def user_is_white(game: chess.pgn.Game) -> bool:
+    return game.headers.get("White", "").lower() == USERNAME.lower()
+
+
+def first_san_moves(game: chess.pgn.Game, count: int) -> list[str]:
+    board = game.board()
+    result: list[str] = []
+    for move in list(game.mainline_moves())[:count]:
+        result.append(board.san(move))
+        board.push(move)
+    return result
 
 
 def is_na3_game(game: chess.pgn.Game) -> bool:
-    if game.headers.get("White", "").lower() != USERNAME.lower():
-        return False
-
-    board = game.board()
-    moves = []
-
-    for move in list(game.mainline_moves())[:3]:
-        moves.append(board.san(move))
-        board.push(move)
-
-    return moves == ["e4", "c5", "Na3"]
+    return user_is_white(game) and first_san_moves(game, 3) == ["e4", "c5", "Na3"]
 
 
-def fetch_recent_games() -> list[dict]:
-    archive_data = download_json(
+def fetch_recent_game_records() -> list[dict[str, Any]]:
+    archive_data = get_json(
         f"https://api.chess.com/pub/player/{USERNAME.lower()}/games/archives"
     )
-
     archive_urls = archive_data.get("archives", [])
-
     if not archive_urls:
-        raise RuntimeError("No Chess.com game archives were found.")
+        raise RuntimeError(f"No Chess.com archives found for {USERNAME}.")
 
-    games = []
-
-    # Check the three newest monthly archives.
+    records: list[dict[str, Any]] = []
     for archive_url in reversed(archive_urls[-3:]):
-        month_data = download_json(archive_url)
+        month_data = get_json(archive_url)
+        records.extend(
+            record
+            for record in month_data.get("games", [])
+            if record.get("pgn")
+        )
 
-        for game_data in month_data.get("games", []):
-            if game_data.get("pgn"):
-                games.append(game_data)
-
-    games.sort(
-        key=lambda item: int(item.get("end_time", 0)),
-        reverse=True,
-    )
-
-    return games
+    records.sort(key=lambda item: int(item.get("end_time", 0)), reverse=True)
+    return records
 
 
-def select_game(game_records: list[dict]) -> tuple[dict, chess.pgn.Game]:
-    for record in game_records:
-        game = read_pgn(record["pgn"])
-
-        if not belongs_to_user(game):
+def select_game(records: list[dict[str, Any]]) -> tuple[dict[str, Any], chess.pgn.Game]:
+    for record in records:
+        game = parse_game(record["pgn"])
+        if not game_belongs_to_user(game):
             continue
-
         if MODE == "latest_game":
             return record, game
-
         if MODE == "latest_na3" and is_na3_game(game):
             return record, game
 
-    raise RuntimeError(
-        f"No suitable game was found using mode: {MODE}"
-    )
+    raise RuntimeError(f"No matching game found for mode '{MODE}'.")
 
 
-def score_in_centipawns(
-    information: dict,
-    point_of_view: chess.Color = chess.WHITE,
-) -> int:
-    score = information["score"].pov(point_of_view)
-    value = score.score(mate_score=100000)
-
-    return int(value or 0)
+def score_cp(info: dict[str, Any], pov: chess.Color = chess.WHITE) -> int:
+    score = info["score"].pov(pov).score(mate_score=100000)
+    return int(score or 0)
 
 
-def display_score(centipawns: int) -> str:
-    if centipawns >= 99000:
+def format_eval(cp: int) -> str:
+    if cp >= 99000:
         return "+Mate"
-
-    if centipawns <= -99000:
+    if cp <= -99000:
         return "-Mate"
+    return f"{cp / 100:+.2f}"
 
-    return f"{centipawns / 100:+.2f}"
 
-
-def classify_loss(loss: int) -> str:
-    if loss >= 250:
+def classify_loss(loss_cp: int) -> str:
+    if loss_cp >= 250:
         return "Blunder"
-
-    if loss >= 120:
+    if loss_cp >= 120:
         return "Mistake"
-
-    if loss >= 60:
+    if loss_cp >= 60:
         return "Inaccuracy"
-
     return "OK"
 
 
-def variation_to_san(
-    board: chess.Board,
-    principal_variation: list[chess.Move],
-    maximum_plies: int = 8,
-) -> str:
-    temporary_board = board.copy()
-    san_moves = []
-
-    for move in principal_variation[:maximum_plies]:
-        if move not in temporary_board.legal_moves:
+def pv_to_san(board: chess.Board, pv: list[chess.Move], max_plies: int = 8) -> str:
+    clone = board.copy()
+    san: list[str] = []
+    for move in pv[:max_plies]:
+        if move not in clone.legal_moves:
             break
-
-        san_moves.append(temporary_board.san(move))
-        temporary_board.push(move)
-
-    return " ".join(san_moves)
+        san.append(clone.san(move))
+        clone.push(move)
+    return " ".join(san)
 
 
-def run_engine_analysis(game: chess.pgn.Game) -> list[dict]:
+def analyse_game(game: chess.pgn.Game) -> list[dict[str, Any]]:
     engine = chess.engine.SimpleEngine.popen_uci(STOCKFISH_PATH)
-
     try:
         try:
-            engine.configure(
-                {
-                    "Threads": 2,
-                    "Hash": 256,
-                }
-            )
+            engine.configure({"Threads": 2, "Hash": 256})
         except Exception:
             pass
 
         board = game.board()
-        results = []
+        rows: list[dict[str, Any]] = []
 
-        previous_information = engine.analyse(
+        previous = engine.analyse(
             board,
             chess.engine.Limit(depth=DEPTH),
             multipv=3,
         )
+        if not isinstance(previous, list):
+            previous = [previous]
 
-        if not isinstance(previous_information, list):
-            previous_information = [previous_information]
-
-        for ply_number, played_move in enumerate(
-            game.mainline_moves(),
-            start=1,
-        ):
+        for ply, move in enumerate(game.mainline_moves(), start=1):
             mover = board.turn
-            played_san = board.san(played_move)
+            played = board.san(move)
+            before_cp = score_cp(previous[0])
 
-            evaluation_before = score_in_centipawns(
-                previous_information[0]
-            )
+            pv = previous[0].get("pv", [])
+            best_move = pv[0] if pv else None
+            best_san = board.san(best_move) if best_move in board.legal_moves else ""
 
-            best_line = previous_information[0].get("pv", [])
-            best_move = best_line[0] if best_line else None
+            candidates = [
+                {
+                    "evaluation": format_eval(score_cp(info)),
+                    "line": pv_to_san(board, info.get("pv", [])),
+                }
+                for info in previous[:3]
+            ]
 
-            if best_move and best_move in board.legal_moves:
-                best_move_san = board.san(best_move)
-            else:
-                best_move_san = ""
+            board.push(move)
 
-            candidate_lines = []
-
-            for information in previous_information[:3]:
-                candidate_lines.append(
-                    {
-                        "evaluation": display_score(
-                            score_in_centipawns(information)
-                        ),
-                        "line": variation_to_san(
-                            board,
-                            information.get("pv", []),
-                        ),
-                    }
-                )
-
-            board.push(played_move)
-
-            new_information = engine.analyse(
+            after = engine.analyse(
                 board,
                 chess.engine.Limit(depth=DEPTH),
                 multipv=3,
             )
+            if not isinstance(after, list):
+                after = [after]
 
-            if not isinstance(new_information, list):
-                new_information = [new_information]
-
-            evaluation_after = score_in_centipawns(
-                new_information[0]
+            after_cp = score_cp(after[0])
+            loss_cp = (
+                max(0, before_cp - after_cp)
+                if mover == chess.WHITE
+                else max(0, after_cp - before_cp)
             )
 
-            if mover == chess.WHITE:
-                loss = max(
-                    0,
-                    evaluation_before - evaluation_after,
-                )
-            else:
-                loss = max(
-                    0,
-                    evaluation_after - evaluation_before,
-                )
-
-            results.append(
+            rows.append(
                 {
-                    "ply": ply_number,
-                    "move_number": (ply_number + 1) // 2,
+                    "ply": ply,
+                    "move_number": (ply + 1) // 2,
                     "side": "White" if mover == chess.WHITE else "Black",
-                    "played": played_san,
-                    "evaluation": display_score(evaluation_after),
-                    "evaluation_cp": evaluation_after,
-                    "loss_cp": loss,
-                    "classification": classify_loss(loss),
-                    "best_move": best_move_san,
-                    "candidate_lines": candidate_lines,
-                    "fen": board.fen(),
+                    "played": played,
+                    "evaluation": format_eval(after_cp),
+                    "evaluation_cp": after_cp,
+                    "loss_cp": loss_cp,
+                    "classification": classify_loss(loss_cp),
+                    "best_move": best_san,
+                    "candidate_lines": candidates,
+                    "fen_after": board.fen(),
                 }
             )
+            previous = after
 
-            previous_information = new_information
-
-        return results
-
+        return rows
     finally:
         engine.quit()
+
+
+def detect_patterns(user_rows: list[dict[str, Any]]) -> list[str]:
+    patterns: list[str] = []
+
+    for row in user_rows:
+        move = row["played"]
+        classification = row["classification"]
+        loss = row["loss_cp"]
+
+        if classification == "OK":
+            continue
+
+        if move.startswith("d5") or move.startswith("e5"):
+            patterns.append("premature central pawn advance")
+
+        if move.startswith("Nb6") or move.startswith("Na4") or move.startswith("Nc4"):
+            patterns.append("knight relocation created tactical or positional risk")
+
+        if move.startswith("Q"):
+            patterns.append("queen move lost time or created tactical exposure")
+
+        if loss >= 250:
+            patterns.append("forcing-move oversight")
+
+    return patterns
 
 
 def safe_filename(text: str) -> str:
     return re.sub(r"[^A-Za-z0-9_-]+", "_", text)
 
 
-def make_report(
-    game_record: dict,
+def move_label(row: dict[str, Any]) -> str:
+    dots = "." if row["side"] == "White" else "..."
+    return f"{row['move_number']}{dots}{row['played']}"
+
+
+def build_report(
+    record: dict[str, Any],
     game: chess.pgn.Game,
-    analysis: list[dict],
+    rows: list[dict[str, Any]],
+    patterns: list[str],
 ) -> str:
-    user_is_white = (
-        game.headers.get("White", "").lower() == USERNAME.lower()
-    )
-
-    user_side = "White" if user_is_white else "Black"
-
-    user_moves = [
-        row for row in analysis
-        if row["side"] == user_side
-    ]
-
-    important_moves = sorted(
-        user_moves,
-        key=lambda row: row["loss_cp"],
-        reverse=True,
-    )[:5]
-
+    side = "White" if user_is_white(game) else "Black"
+    user_rows = [row for row in rows if row["side"] == side]
+    critical = sorted(user_rows, key=lambda row: row["loss_cp"], reverse=True)[:5]
     first_problem = next(
-        (
-            row
-            for row in user_moves
-            if row["classification"] != "OK"
-        ),
+        (row for row in user_rows if row["classification"] != "OK"),
         None,
     )
 
-    lines = []
+    report: list[str] = []
+    report.append("# Project Na3 analysis report")
+    report.append("")
+    report.append(f"- **Game:** {game.headers.get('White')} vs {game.headers.get('Black')}")
+    report.append(f"- **Date:** {game.headers.get('Date', 'Unknown')}")
+    report.append(f"- **Result:** {game.headers.get('Result', '*')}")
+    report.append(f"- **Chess.com:** {record.get('url', 'Unavailable')}")
+    report.append(f"- **Engine evidence:** Stockfish depth {DEPTH}, MultiPV 3")
+    report.append("")
 
-    lines.append("# Project Na3 Stockfish report")
-    lines.append("")
-    lines.append(
-        f"**Game:** {game.headers.get('White', 'White')} "
-        f"vs {game.headers.get('Black', 'Black')}"
-    )
-    lines.append("")
-    lines.append(
-        f"**Date:** {game.headers.get('Date', 'Unknown')}"
-    )
-    lines.append("")
-    lines.append(
-        f"**Result:** {game.headers.get('Result', '*')}"
-    )
-    lines.append("")
-    lines.append(
-        f"**Chess.com game:** {game_record.get('url', 'Unavailable')}"
-    )
-    lines.append("")
-    lines.append(
-        f"**Engine setting:** Stockfish depth {DEPTH}, MultiPV 3"
-    )
-    lines.append("")
-
-    lines.append("## Practical conclusion")
-    lines.append("")
-
+    report.append("## Practical conclusion")
+    report.append("")
     if first_problem:
-        dots = "." if first_problem["side"] == "White" else "..."
-        move_name = (
-            f"{first_problem['move_number']}"
-            f"{dots}{first_problem['played']}"
-        )
-
-        lines.append(
+        report.append(
             f"The first engine-flagged problem for {USERNAME} was "
-            f"**{move_name}**."
-        )
-        lines.append("")
-        lines.append(
-            f"It was classified as **"
-            f"{first_problem['classification']}** "
-            f"with an estimated loss of "
-            f"{first_problem['loss_cp'] / 100:.2f} pawns."
+            f"**{move_label(first_problem)}**: "
+            f"{first_problem['classification'].lower()}, "
+            f"approximately {first_problem['loss_cp'] / 100:.2f} pawns."
         )
     else:
-        lines.append(
-            "No move crossed the configured inaccuracy threshold."
-        )
+        report.append("No move crossed the configured inaccuracy threshold.")
+    report.append("")
 
-    lines.append("")
-    lines.append("## Biggest turning points")
-    lines.append("")
-
-    for row in important_moves:
-        dots = "." if row["side"] == "White" else "..."
-        move_name = (
-            f"{row['move_number']}{dots}{row['played']}"
-        )
-
-        lines.append(
-            f"### {move_name} — {row['classification']}"
-        )
-        lines.append("")
-        lines.append(
-            f"- Evaluation after the move: **{row['evaluation']}**"
-        )
-        lines.append(
-            f"- Estimated loss: "
-            f"**{row['loss_cp'] / 100:.2f} pawns**"
-        )
-
+    report.append("## Engine turning points")
+    report.append("")
+    for row in critical:
+        report.append(f"### {move_label(row)} â {row['classification']}")
+        report.append("")
+        report.append(f"- Evaluation after the move: **{row['evaluation']}**")
+        report.append(f"- Estimated loss: **{row['loss_cp'] / 100:.2f} pawns**")
         if row["best_move"]:
-            lines.append(
-                f"- Stockfish first choice: **{row['best_move']}**"
-            )
-
-        lines.append("- Candidate engine lines:")
-
+            report.append(f"- Stockfish first choice: **{row['best_move']}**")
+        report.append("- Candidate lines:")
         for candidate in row["candidate_lines"]:
-            lines.append(
-                f"  - `{candidate['evaluation']}` — "
-                f"{candidate['line']}"
+            report.append(
+                f"  - `{candidate['evaluation']}` â {candidate['line']}"
             )
+        report.append("")
 
-        lines.append("")
+    report.append("## Automatically detected practical patterns")
+    report.append("")
+    if patterns:
+        for pattern in sorted(set(patterns)):
+            report.append(f"- {pattern}")
+    else:
+        report.append("- No recurring pattern detected from this game alone.")
+    report.append("")
 
-    lines.append("## Move-by-move table")
-    lines.append("")
-    lines.append(
-        "| Move | Played | Evaluation | Loss | Classification | Best move |"
-    )
-    lines.append(
-        "|---|---|---:|---:|---|---|"
-    )
-
-    for row in analysis:
+    report.append("## Move-by-move engine table")
+    report.append("")
+    report.append("| Move | Played | Eval | Loss | Label | Best move |")
+    report.append("|---:|---|---:|---:|---|---|")
+    for row in rows:
         dots = "." if row["side"] == "White" else "..."
-        move_label = f"{row['move_number']}{dots}"
-
-        lines.append(
-            f"| {move_label} | {row['played']} | "
-            f"{row['evaluation']} | "
-            f"{row['loss_cp'] / 100:.2f} | "
-            f"{row['classification']} | "
-            f"{row['best_move']} |"
+        report.append(
+            f"| {row['move_number']}{dots} | {row['played']} | "
+            f"{row['evaluation']} | {row['loss_cp'] / 100:.2f} | "
+            f"{row['classification']} | {row['best_move']} |"
         )
+    report.append("")
 
-    lines.append("")
-    lines.append("## PGN")
-    lines.append("")
-    lines.append("```pgn")
-
+    report.append("## PGN")
+    report.append("")
+    report.append("```pgn")
     exporter = chess.pgn.StringExporter(
         headers=True,
         variations=False,
         comments=False,
     )
-
-    lines.append(game.accept(exporter))
-    lines.append("```")
-    lines.append("")
-    lines.append(
-        "> Engine scores are evidence, not strategic explanations. "
-        "Project Na3 should discuss database evidence, human judgement "
-        "and practical experience separately."
+    report.append(game.accept(exporter))
+    report.append("```")
+    report.append("")
+    report.append(
+        "> This report contains engine evidence and automatic pattern detection. "
+        "Human strategic judgement, database evidence and repertoire conclusions "
+        "must still be added separately."
     )
+    return "\n".join(report)
 
-    return "\n".join(lines)
+
+def update_index(
+    report_path: Path,
+    record: dict[str, Any],
+    game: chess.pgn.Game,
+    rows: list[dict[str, Any]],
+) -> None:
+    index = load_json(INDEX_FILE, {"games": []})
+    game_key = f"{record.get('end_time', 0)}:{game.headers.get('White')}:{game.headers.get('Black')}"
+
+    if any(item.get("game_key") == game_key for item in index["games"]):
+        return
+
+    user_side = "White" if user_is_white(game) else "Black"
+    user_rows = [row for row in rows if row["side"] == user_side]
+    worst = max(user_rows, key=lambda row: row["loss_cp"], default=None)
+
+    index["games"].append(
+        {
+            "game_key": game_key,
+            "date": game.headers.get("Date", "Unknown"),
+            "white": game.headers.get("White", ""),
+            "black": game.headers.get("Black", ""),
+            "result": game.headers.get("Result", "*"),
+            "url": record.get("url", ""),
+            "report": str(report_path),
+            "worst_move": move_label(worst) if worst else None,
+            "worst_loss_cp": worst["loss_cp"] if worst else 0,
+        }
+    )
+    save_json(INDEX_FILE, index)
+
+
+def update_patterns(patterns: list[str]) -> None:
+    existing = load_json(PATTERNS_FILE, {"counts": {}})
+    counts = Counter(existing.get("counts", {}))
+    counts.update(patterns)
+    save_json(PATTERNS_FILE, {"counts": dict(counts.most_common())})
 
 
 def main() -> None:
-    REPORTS_FOLDER.mkdir(exist_ok=True)
+    REPORTS_DIR.mkdir(exist_ok=True)
 
-    game_records = fetch_recent_games()
-    game_record, game = select_game(game_records)
+    records = fetch_recent_game_records()
+    record, game = select_game(records)
 
-    game_identifier = (
-        f"{game_record.get('end_time', 0)}:"
+    game_key = (
+        f"{record.get('end_time', 0)}:"
         f"{game.headers.get('White', '')}:"
         f"{game.headers.get('Black', '')}"
     )
 
-    old_state = {}
-
-    if STATE_FILE.exists():
-        try:
-            old_state = json.loads(STATE_FILE.read_text())
-        except Exception:
-            old_state = {}
-
-    if old_state.get("last_analysed_game") == game_identifier:
-        print("The latest matching game has already been analysed.")
+    state = load_json(STATE_FILE, {})
+    if MODE == "latest_na3" and state.get("last_analysed_game") == game_key:
+        print("Latest matching game has already been analysed.")
         return
 
     print(
-        f"Analysing {game.headers.get('White')} "
-        f"vs {game.headers.get('Black')}..."
+        f"Analysing {game.headers.get('White')} vs "
+        f"{game.headers.get('Black')} at depth {DEPTH}..."
     )
 
-    analysis = run_engine_analysis(game)
+    rows = analyse_game(game)
+    user_side = "White" if user_is_white(game) else "Black"
+    user_rows = [row for row in rows if row["side"] == user_side]
+    patterns = detect_patterns(user_rows)
 
     date = game.headers.get("Date", "unknown").replace(".", "-")
-    white = safe_filename(
-        game.headers.get("White", "White")
+    white = safe_filename(game.headers.get("White", "White"))
+    black = safe_filename(game.headers.get("Black", "Black"))
+    report_path = REPORTS_DIR / (
+        f"{date}_{white}_vs_{black}_{record.get('end_time', 0)}.md"
     )
-    black = safe_filename(
-        game.headers.get("Black", "Black")
-    )
-
-    filename = (
-        f"{date}_{white}_vs_{black}_"
-        f"{game_record.get('end_time', 0)}.md"
-    )
-
-    report_path = REPORTS_FOLDER / filename
 
     report_path.write_text(
-        make_report(game_record, game, analysis),
+        build_report(record, game, rows, patterns),
         encoding="utf-8",
     )
 
-    STATE_FILE.write_text(
-        json.dumps(
-            {
-                "last_analysed_game": game_identifier,
-                "last_report": str(report_path),
-                "analysed_at_utc": datetime.now(
-                    timezone.utc
-                ).isoformat(),
-                "mode": MODE,
-                "depth": DEPTH,
-            },
-            indent=2,
-        )
-        + "\n",
-        encoding="utf-8",
+    update_index(report_path, record, game, rows)
+    update_patterns(patterns)
+
+    save_json(
+        STATE_FILE,
+        {
+            "last_analysed_game": game_key,
+            "last_report": str(report_path),
+            "analysed_at_utc": datetime.now(timezone.utc).isoformat(),
+            "mode": MODE,
+            "depth": DEPTH,
+        },
     )
 
     print(f"Report created: {report_path}")
