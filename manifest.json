@@ -1,0 +1,14 @@
+{
+  "project": "Project Na3 automatic engine analysis",
+  "username": "chessicek",
+  "mode": "latest_na3",
+  "default_depth": 18,
+  "created": "2026-07-19",
+  "files": [
+    ".github/workflows/analyse-na3.yml",
+    "scripts/analyse_latest.py",
+    "requirements.txt",
+    "README-SETUP.md",
+    "reports/.gitkeep"
+  ]
+}
