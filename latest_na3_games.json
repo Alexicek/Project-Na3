@@ -1,5 +1,37 @@
 [
   {
+    "url": "https://www.chess.com/game/live/171799779342",
+    "pgn": "[Event \"Live Chess\"]\n[Site \"Chess.com\"]\n[Date \"2026.07.19\"]\n[Round \"-\"]\n[White \"chessicek\"]\n[Black \"Benriach17\"]\n[Result \"0-1\"]\n[CurrentPosition \"r3kbnr/4pppp/p2p4/1p1PP3/2N5/5P2/PP3P1P/R1B1K2R w KQkq - 0 15\"]\n[Timezone \"UTC\"]\n[ECO \"B20\"]\n[ECOUrl \"https://www.chess.com/openings/Sicilian-Defense-Kronberger-Variation-2...Nc6-3.Bb5\"]\n[UTCDate \"2026.07.19\"]\n[UTCTime \"19:42:08\"]\n[WhiteElo \"1625\"]\n[BlackElo \"1690\"]\n[TimeControl \"180+2\"]\n[Termination \"Benriach17 won by resignation\"]\n[StartTime \"19:42:08\"]\n[EndDate \"2026.07.19\"]\n[EndTime \"19:45:53\"]\n[Link \"https://www.chess.com/game/live/171799779342\"]\n\n1. e4 {[%clk 0:02:58.6]} 1... c5 {[%clk 0:03:00.3]} 2. Na3 {[%clk 0:02:59.4]} 2... Nc6 {[%clk 0:02:59.1]} 3. Bb5 {[%clk 0:02:59.2]} 3... a6 {[%clk 0:02:57.7]} 4. Bxc6 {[%clk 0:02:59.5]} 4... bxc6 {[%clk 0:02:58.4]} 5. Nf3 {[%clk 0:02:57.1]} 5... d6 {[%clk 0:02:54.4]} 6. c3 {[%clk 0:02:56.5]} 6... Bg4 {[%clk 0:02:52]} 7. Qa4 {[%clk 0:02:48]} 7... Qd7 {[%clk 0:02:44.8]} 8. d4 {[%clk 0:02:35.6]} 8... Bxf3 {[%clk 0:02:43.9]} 9. gxf3 {[%clk 0:02:36.2]} 9... cxd4 {[%clk 0:02:44.7]} 10. cxd4 {[%clk 0:02:34.6]} 10... Nf6 {[%clk 0:02:19.7]} 11. Nc4 {[%clk 0:02:33.2]} 11... Qb7 {[%clk 0:02:15.3]} 12. e5 {[%clk 0:02:28.8]} 12... Ng8 {[%clk 0:02:01.3]} 13. d5 {[%clk 0:02:21.5]} 13... Qb5 {[%clk 0:01:56]} 14. Qxb5 {[%clk 0:01:48.5]} 14... cxb5 {[%clk 0:01:56.2]} 0-1\n",
+    "time_control": "180+2",
+    "end_time": 1784490353,
+    "rated": true,
+    "accuracies": {
+      "white": 88.04,
+      "black": 83.4
+    },
+    "tcn": "mCYIbq5QfHWOHQXQgvZRks6Edy7ZlBEvovIBsB!TqAZXCKT!BJXHyHQH",
+    "uuid": "edd72f45-83a9-11f1-9d32-060c3d01000f",
+    "initial_setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+    "fen": "r3kbnr/4pppp/p2p4/1p1PP3/2N5/5P2/PP3P1P/R1B1K2R w KQkq - 0 15",
+    "time_class": "blitz",
+    "rules": "chess",
+    "white": {
+      "rating": 1625,
+      "result": "resigned",
+      "@id": "https://api.chess.com/pub/player/chessicek",
+      "username": "chessicek",
+      "uuid": "0bd24d16-88d0-11e1-803b-000000000000"
+    },
+    "black": {
+      "rating": 1690,
+      "result": "win",
+      "@id": "https://api.chess.com/pub/player/benriach17",
+      "username": "Benriach17",
+      "uuid": "b783f4be-845d-11e7-805e-000000000000"
+    },
+    "eco": "https://www.chess.com/openings/Sicilian-Defense-Kronberger-Variation-2...Nc6-3.Bb5"
+  },
+  {
     "url": "https://www.chess.com/game/live/171798825730",
     "pgn": "[Event \"Live Chess\"]\n[Site \"Chess.com\"]\n[Date \"2026.07.19\"]\n[Round \"-\"]\n[White \"chessicek\"]\n[Black \"Wivafro\"]\n[Result \"0-1\"]\n[CurrentPosition \"3rk2r/p3bppp/2p1p3/2p5/4N3/1PPb4/P1KP1PPP/R1B4R w k - 1 16\"]\n[Timezone \"UTC\"]\n[ECO \"B20\"]\n[ECOUrl \"https://www.chess.com/openings/Sicilian-Defense-Kronberger-Variation\"]\n[UTCDate \"2026.07.19\"]\n[UTCTime \"19:04:24\"]\n[WhiteElo \"1625\"]\n[BlackElo \"1583\"]\n[TimeControl \"180+2\"]\n[Termination \"Wivafro won by resignation\"]\n[StartTime \"19:04:24\"]\n[EndDate \"2026.07.19\"]\n[EndTime \"19:08:21\"]\n[Link \"https://www.chess.com/game/live/171798825730\"]\n\n1. e4 {[%clk 0:03:01.5]} 1... c5 {[%clk 0:02:58.9]} 2. Na3 {[%clk 0:03:01.6]} 2... e6 {[%clk 0:02:56.1]} 3. c3 {[%clk 0:03:00.8]} 3... Nc6 {[%clk 0:02:55.6]} 4. Bb5 {[%clk 0:03:00.5]} 4... Nf6 {[%clk 0:02:42]} 5. Bxc6 {[%clk 0:02:52.1]} 5... bxc6 {[%clk 0:02:42.9]} 6. e5 {[%clk 0:02:47.1]} 6... Nd5 {[%clk 0:02:40.8]} 7. Nc4 {[%clk 0:02:37.8]} 7... Ba6 {[%clk 0:02:30.3]} 8. Ne3 {[%clk 0:02:16.4]} 8... Qg5 {[%clk 0:02:12.4]} 9. Nf3 {[%clk 0:02:04.2]} 9... Nxe3 {[%clk 0:02:05]} 10. Nxg5 {[%clk 0:01:59.1]} 10... Nxd1 {[%clk 0:02:03.7]} 11. Kxd1 {[%clk 0:01:59.3]} 11... d5 {[%clk 0:01:46.7]} 12. exd6 {[%clk 0:01:56.4]} 12... Bxd6 {[%clk 0:01:45.5]} 13. Ne4 {[%clk 0:01:53.3]} 13... Be7 {[%clk 0:01:43.3]} 14. Kc2 {[%clk 0:01:49.4]} 14... Rd8 {[%clk 0:01:37.3]} 15. b3 {[%clk 0:01:37.5]} 15... Bd3+ {[%clk 0:01:35.8]} 0-1\n",
     "time_control": "180+2",
