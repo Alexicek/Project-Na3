@@ -1,35 +1,24 @@
-name: Analyse latest Na3 game
+name: Analyse Project Na3 Position
 
 on:
   workflow_dispatch:
     inputs:
-      mode:
-        description: Which game should be analysed?
+      moves:
+        description: "Moves in SAN, for example: e4 c5 Na3 Nc6 Bb5 e6 Nf3 Nge7"
         required: true
-        default: latest_na3
-        type: choice
-        options:
-          - latest_na3
-          - latest_game
+        default: "e4 c5 Na3 Nc6 Bb5 e6 Nf3 Nge7 O-O a6 Bxc6"
       depth:
-        description: Stockfish depth
+        description: "Stockfish depth"
         required: true
-        default: "18"
-
-  schedule:
-    - cron: "17 4 * * *"
+        default: "24"
 
 permissions:
   contents: write
 
-concurrency:
-  group: project-na3-analysis
-  cancel-in-progress: false
-
 jobs:
   analyse:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 20
 
     steps:
       - name: Check out repository
@@ -44,39 +33,293 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y stockfish
-          python -m pip install --upgrade pip
           pip install python-chess requests
 
-      - name: Analyse game
+      - name: Analyse position
         env:
-          CHESSCOM_USERNAME: chessicek
-          ANALYSIS_MODE: ${{ github.event.inputs.mode || 'latest_na3' }}
-          STOCKFISH_DEPTH: ${{ github.event.inputs.depth || '18' }}
-          STOCKFISH_PATH: /usr/games/stockfish
-        run: python analyse_latest.py
+          MOVES: ${{ inputs.moves }}
+          DEPTH: ${{ inputs.depth }}
+          LICHESS_TOKEN: ${{ secrets.LICHESS_TOKEN }}
+        run: |
+          mkdir -p reports
 
-      - name: Commit generated files
+          cat > /tmp/analyse.py <<'PY'
+          import os
+          import requests
+          import chess
+          import chess.engine
+          from pathlib import Path
+
+          moves_text = os.environ["MOVES"]
+          depth = int(os.environ.get("DEPTH", "24"))
+          token = os.environ.get("LICHESS_TOKEN", "").strip()
+
+          board = chess.Board()
+          played = []
+
+          for token_move in moves_text.split():
+              move = board.parse_san(token_move)
+              played.append(board.san(move))
+              board.push(move)
+
+          headers = {
+              "User-Agent": "Project-Na3-Research",
+              "Accept": "application/json",
+          }
+
+          if token:
+              headers["Authorization"] = f"Bearer {token}"
+
+          def score_text(cp=None, mate=None):
+              if mate is not None:
+                  return f"M{mate}" if mate > 0 else f"-M{abs(mate)}"
+              if cp is None:
+                  return "unknown"
+              return f"{cp / 100:+.2f}"
+
+          def pv_to_san(uci_moves):
+              temp = board.copy()
+              result = []
+
+              for text in uci_moves:
+                  try:
+                      move = chess.Move.from_uci(text)
+                      if move not in temp.legal_moves:
+                          break
+                      result.append(temp.san(move))
+                      temp.push(move)
+                  except Exception:
+                      break
+
+              return " ".join(result[:12])
+
+          engine_lines = []
+          engine_source = ""
+          engine_note = ""
+
+          try:
+              response = requests.get(
+                  "https://lichess.org/api/cloud-eval",
+                  params={
+                      "fen": board.fen(),
+                      "multiPv": 3,
+                      "variant": "standard",
+                  },
+                  headers=headers,
+                  timeout=20,
+              )
+
+              if response.status_code == 200:
+                  data = response.json()
+                  engine_source = "Lichess Cloud Evaluation"
+
+                  for number, pv in enumerate(data.get("pvs", [])[:3], start=1):
+                      engine_lines.append({
+                          "rank": number,
+                          "evaluation": score_text(
+                              pv.get("cp"),
+                              pv.get("mate"),
+                          ),
+                          "depth": data.get("depth", "—"),
+                          "pv": pv_to_san(pv.get("moves", "").split()),
+                      })
+              else:
+                  engine_note = f"Lichess cloud returned HTTP {response.status_code}"
+
+          except Exception as exc:
+              engine_note = f"Lichess cloud error: {exc}"
+
+          if not engine_lines:
+              engine_source = "Local Stockfish"
+
+              engine = chess.engine.SimpleEngine.popen_uci(
+                  "/usr/games/stockfish"
+              )
+
+              engine.configure({
+                  "Threads": 2,
+                  "Hash": 256,
+              })
+
+              information = engine.analyse(
+                  board,
+                  chess.engine.Limit(depth=depth),
+                  multipv=3,
+              )
+
+              engine.quit()
+
+              for number, info in enumerate(information, start=1):
+                  score = info["score"].pov(board.turn)
+                  mate = score.mate()
+                  cp = None if mate is not None else score.score(
+                      mate_score=100000
+                  )
+
+                  engine_lines.append({
+                      "rank": number,
+                      "evaluation": score_text(cp, mate),
+                      "depth": info.get("depth", "—"),
+                      "pv": pv_to_san(
+                          [move.uci() for move in info.get("pv", [])]
+                      ),
+                  })
+
+          def get_explorer(url, player_database):
+              params = {
+                  "fen": board.fen(),
+                  "moves": 10,
+                  "topGames": 4,
+              }
+
+              if player_database:
+                  params.update({
+                      "variant": "standard",
+                      "speeds": "blitz,rapid,classical",
+                      "ratings": "1600,1800,2000,2200,2500",
+                  })
+
+              try:
+                  response = requests.get(
+                      url,
+                      params=params,
+                      headers=headers,
+                      timeout=25,
+                  )
+
+                  if response.status_code == 200:
+                      return response.json(), ""
+                  return None, f"HTTP {response.status_code}"
+
+              except Exception as exc:
+                  return None, str(exc)
+
+          player_data, player_error = get_explorer(
+              "https://explorer.lichess.ovh/lichess",
+              True,
+          )
+
+          masters_data, masters_error = get_explorer(
+              "https://explorer.lichess.ovh/masters",
+              False,
+          )
+
+          def explorer_section(title, data, error):
+              lines = [f"## {title}", ""]
+
+              if not data:
+                  lines.append(f"No data available: {error}")
+                  lines.append("")
+                  return lines
+
+              white = data.get("white", 0)
+              draws = data.get("draws", 0)
+              black = data.get("black", 0)
+              total = white + draws + black
+
+              lines.append(f"Total games: **{total}**")
+              lines.append("")
+              lines.append("| Move | Games | Frequency | White | Draw | Black |")
+              lines.append("|---|---:|---:|---:|---:|---:|")
+
+              for move in data.get("moves", [])[:10]:
+                  games = (
+                      move.get("white", 0)
+                      + move.get("draws", 0)
+                      + move.get("black", 0)
+                  )
+
+                  frequency = (
+                      f"{100 * games / total:.1f}%"
+                      if total
+                      else "0.0%"
+                  )
+
+                  lines.append(
+                      f"| {move.get('san', '—')} "
+                      f"| {games} "
+                      f"| {frequency} "
+                      f"| {move.get('white', 0)} "
+                      f"| {move.get('draws', 0)} "
+                      f"| {move.get('black', 0)} |"
+                  )
+
+              lines.append("")
+              return lines
+
+          report = [
+              "# Project Na3 Research Report",
+              "",
+              f"**Moves:** `{moves_text}`",
+              "",
+              f"**FEN:** `{board.fen()}`",
+              "",
+              f"**Side to move:** {'White' if board.turn else 'Black'}",
+              "",
+              "## Engine evidence",
+              "",
+              f"**Source:** {engine_source}",
+              "",
+              "> Evaluations are from the side to move.",
+              "",
+              "| Rank | Evaluation | Depth | Principal variation |",
+              "|---:|---:|---:|---|",
+          ]
+
+          for line in engine_lines:
+              report.append(
+                  f"| {line['rank']} "
+                  f"| {line['evaluation']} "
+                  f"| {line['depth']} "
+                  f"| {line['pv']} |"
+              )
+
+          if engine_note:
+              report.extend([
+                  "",
+                  f"Cloud note: {engine_note}",
+              ])
+
+          report.extend([""])
+          report.extend(
+              explorer_section(
+                  "Lichess player database",
+                  player_data,
+                  player_error,
+              )
+          )
+
+          report.extend(
+              explorer_section(
+                  "Lichess Masters database",
+                  masters_data,
+                  masters_error,
+              )
+          )
+
+          report.extend([
+              "## Evidence interpretation",
+              "",
+              "- Engine evidence is reported separately from database evidence.",
+              "- Database results do not prove that a move is objectively best.",
+              "- Strategic conclusions should be added after reviewing the position.",
+              "",
+          ])
+
+          Path("reports/manual_analysis.md").write_text(
+              "\n".join(report),
+              encoding="utf-8",
+          )
+
+          print("\n".join(report))
+          PY
+
+          python /tmp/analyse.py
+
+      - name: Save report to repository
         run: |
           git config user.name "Project Na3 Bot"
           git config user.email "actions@users.noreply.github.com"
-
-          git add reports analysis_index.json recurring_patterns.json state.json
-
-          if git diff --cached --quiet; then
-            echo "No new analysis to commit."
-            exit 0
-          fi
-
-          git commit -m "Add latest Na3 analysis"
+          git add reports/manual_analysis.md
+          git diff --cached --quiet || git commit -m "Update Na3 analysis report"
           git push
-
-      - name: Upload analysis artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: project-na3-analysis
-          path: |
-            reports/
-            analysis_index.json
-            recurring_patterns.json
-            state.json
-          retention-days: 30
