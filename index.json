@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "username": "Chessicek",
-  "last_updated": "2026-07-24T09:32:59.502152Z",
+  "last_updated": "2026-07-24T11:55:09.205628Z",
   "latest_game": {
-    "end_time": "2026-07-24T06:42:41Z",
+    "end_time": "2026-07-24T10:47:00Z",
     "date": "2026.07.24",
     "white": "chessicek",
-    "white_rating": 1639,
-    "black": "HDaoud",
-    "black_rating": 1602,
+    "white_rating": 1647,
+    "black": "boris_blade",
+    "black_rating": 1636,
     "result": "1-0",
     "user_colour": "White",
     "user_result": "Win",
@@ -16,7 +16,7 @@
     "time_control": "180+2",
     "rated": true,
     "opening": "Scandinavian Defense Closed 2...d4 3.Nce2 e5 4.Ng3",
-    "url": "https://www.chess.com/game/live/171998480990",
+    "url": "https://www.chess.com/game/live/172006004766",
     "pgn": "games/latest.pgn"
   },
   "latest_na3": {
