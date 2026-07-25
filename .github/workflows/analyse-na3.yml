@@ -322,4 +322,5 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git add reports/manual_analysis.md
           git diff --cached --quiet || git commit -m "Update Na3 analysis report"
-          git push
+          git pull --rebase origin main
+          git push origin main
