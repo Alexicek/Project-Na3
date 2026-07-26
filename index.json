@@ -1,31 +1,14 @@
 {
   "schema_version": 1,
   "username": "Chessicek",
-  "last_updated": "2026-07-26T22:11:28.791242Z",
+  "last_updated": "2026-07-26T23:10:58.043292Z",
   "latest_game": {
-    "end_time": "2026-07-26T19:00:43Z",
-    "date": "2026.07.26",
-    "white": "Salah-1965",
-    "white_rating": 1600,
-    "black": "chessicek",
-    "black_rating": 1622,
-    "result": "0-1",
-    "user_colour": "Black",
-    "user_result": "Win",
-    "time_class": "blitz",
-    "time_control": "180+2",
-    "rated": true,
-    "opening": "Queens Pawn Opening 1...d6",
-    "url": "https://www.chess.com/game/live/172116802102",
-    "pgn": "games/latest.pgn"
-  },
-  "latest_na3": {
-    "end_time": "2026-07-26T07:35:34Z",
+    "end_time": "2026-07-26T23:00:14Z",
     "date": "2026.07.26",
     "white": "chessicek",
-    "white_rating": 1613,
-    "black": "orikasof",
-    "black_rating": 1598,
+    "white_rating": 1632,
+    "black": "rotocastro5",
+    "black_rating": 1707,
     "result": "1-0",
     "user_colour": "White",
     "user_result": "Win",
@@ -33,12 +16,29 @@
     "time_control": "180+2",
     "rated": true,
     "opening": "Sicilian Defense Kronberger Variation 2...Nc6 3.Bb5",
-    "url": "https://www.chess.com/game/live/172091013806",
+    "url": "https://www.chess.com/game/live/172124719644",
+    "pgn": "games/latest.pgn"
+  },
+  "latest_na3": {
+    "end_time": "2026-07-26T23:00:14Z",
+    "date": "2026.07.26",
+    "white": "chessicek",
+    "white_rating": 1632,
+    "black": "rotocastro5",
+    "black_rating": 1707,
+    "result": "1-0",
+    "user_colour": "White",
+    "user_result": "Win",
+    "time_class": "blitz",
+    "time_control": "180+2",
+    "rated": true,
+    "opening": "Sicilian Defense Kronberger Variation 2...Nc6 3.Bb5",
+    "url": "https://www.chess.com/game/live/172124719644",
     "pgn": "na3/latest_na3.pgn"
   },
   "counts": {
     "recent_games": 20,
-    "recent_na3_games": 11
+    "recent_na3_games": 12
   },
   "files": {
     "recent_games_json": "games/latest.json",
