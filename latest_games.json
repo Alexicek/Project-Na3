@@ -5,6 +5,10 @@
     "time_control": "180+2",
     "end_time": 1785344891,
     "rated": true,
+    "accuracies": {
+      "white": 76.34,
+      "black": 68.6
+    },
     "tcn": "mCZRbs!Tlt0KnD90DLYQgv2ULU3Upx7PdmTEjr5ZcjZTsyPujcumfmRJegEVvKJCtCTCmtCwfvVLcDwNaeLBvu6SksBLtLSLKQXQu089DRLS0S",
     "uuid": "0bb88a1b-8b6f-11f1-8473-cacb1801000f",
     "initial_setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
