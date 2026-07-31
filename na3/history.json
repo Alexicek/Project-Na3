@@ -1,5 +1,37 @@
 [
   {
+    "end_time": "2026-07-31T18:43:01Z",
+    "date": "2026.07.31",
+    "white": "chessicek",
+    "white_rating": 1570,
+    "black": "jasosha",
+    "black_rating": 1546,
+    "result": "1-0",
+    "user_colour": "White",
+    "user_result": "Win",
+    "time_class": "blitz",
+    "time_control": "180+2",
+    "rated": true,
+    "opening": "Sicilian Defense Kronberger Variation",
+    "url": "https://www.chess.com/game/live/172348882184"
+  },
+  {
+    "end_time": "2026-07-31T18:08:30Z",
+    "date": "2026.07.31",
+    "white": "chessicek",
+    "white_rating": 1562,
+    "black": "SophisticatedSophist",
+    "black_rating": 1591,
+    "result": "0-1",
+    "user_colour": "White",
+    "user_result": "Loss",
+    "time_class": "blitz",
+    "time_control": "180+2",
+    "rated": true,
+    "opening": "Closed Sicilian Defense Traditional Line...4.Nf3 Nxb5 5.Nxb5 a6 6.Nc3",
+    "url": "https://www.chess.com/game/live/172347695930"
+  },
+  {
     "end_time": "2026-07-31T16:09:16Z",
     "date": "2026.07.31",
     "white": "chessicek",
