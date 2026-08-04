@@ -1,5 +1,33 @@
 [
   {
+    "url": "https://www.chess.com/game/live/172539278184",
+    "pgn": "[Event \"Live Chess\"]\n[Site \"Chess.com\"]\n[Date \"2026.08.04\"]\n[Round \"-\"]\n[White \"chessicek\"]\n[Black \"MustafaCub\"]\n[Result \"1/2-1/2\"]\n[CurrentPosition \"7R/2B5/3N4/8/4B3/4NK2/4R3/k7 b - - 4 86\"]\n[Timezone \"UTC\"]\n[ECO \"C45\"]\n[ECOUrl \"https://www.chess.com/openings/Scotch-Game-3...exd4-4.Nxd4-Nxd4-5.Qxd4\"]\n[UTCDate \"2026.08.04\"]\n[UTCTime \"23:04:50\"]\n[WhiteElo \"1562\"]\n[BlackElo \"1556\"]\n[TimeControl \"180+2\"]\n[Termination \"Game drawn by stalemate\"]\n[StartTime \"23:04:50\"]\n[EndDate \"2026.08.04\"]\n[EndTime \"23:15:14\"]\n[Link \"https://www.chess.com/game/live/172539278184\"]\n\n1. e4 {[%clk 0:03:01.3]} 1... e5 {[%clk 0:03:00.8]} 2. Nf3 {[%clk 0:03:01.9]} 2... Nc6 {[%clk 0:03:02.3]} 3. d4 {[%clk 0:03:02.1]} 3... exd4 {[%clk 0:03:03.3]} 4. Nxd4 {[%clk 0:03:03.4]} 4... Nxd4 {[%clk 0:03:04.3]} 5. Qxd4 {[%clk 0:03:03.9]} 5... Be7 {[%clk 0:03:02.6]} 6. Be3 {[%clk 0:03:04.1]} 6... d6 {[%clk 0:02:57]} 7. Nc3 {[%clk 0:03:03.9]} 7... c6 {[%clk 0:02:56.2]} 8. Qxg7 {[%clk 0:03:03.6]} 8... Bf6 {[%clk 0:02:54.2]} 9. Qg3 {[%clk 0:03:02.8]} 9... Be5 {[%clk 0:02:51.8]} 10. f4 {[%clk 0:02:59.4]} 10... Bf6 {[%clk 0:02:48.5]} 11. O-O-O {[%clk 0:02:57.9]} 11... Qa5 {[%clk 0:02:33.3]} 12. Bd4 {[%clk 0:02:24.6]} 12... Be6 {[%clk 0:02:24.5]} 13. Bxf6 {[%clk 0:02:15.6]} 13... Nxf6 {[%clk 0:02:24.6]} 14. Qg7 {[%clk 0:02:15.9]} 14... Nxe4 {[%clk 0:02:06.1]} 15. Nxe4 {[%clk 0:02:08.4]} 15... O-O-O {[%clk 0:02:00.4]} 16. Nxd6+ {[%clk 0:01:55.5]} 16... Kb8 {[%clk 0:01:59]} 17. a3 {[%clk 0:01:47.6]} 17... Qc5 {[%clk 0:01:41.4]} 18. Qe5 {[%clk 0:01:43.4]} 18... Qxe5 {[%clk 0:01:25.4]} 19. fxe5 {[%clk 0:01:43.5]} 19... Rhg8 {[%clk 0:01:25.7]} 20. g3 {[%clk 0:01:34.1]} 20... Rg5 {[%clk 0:01:25.9]} 21. Re1 {[%clk 0:01:03.7]} 21... Kc7 {[%clk 0:01:18.9]} 22. Bd3 {[%clk 0:00:55.4]} 22... h6 {[%clk 0:01:14.9]} 23. Rhf1 {[%clk 0:00:53.4]} 23... Rxe5 {[%clk 0:00:31.8]} 24. Rxe5 {[%clk 0:00:47.6]} 24... Kxd6 {[%clk 0:00:31.8]} 25. Rh5 {[%clk 0:00:40.2]} 25... Rh8 {[%clk 0:00:27.4]} 26. Rf6 {[%clk 0:00:38.8]} 26... Re8 {[%clk 0:00:20.1]} 27. Rhxh6 {[%clk 0:00:37.7]} 27... Ke5 {[%clk 0:00:18.4]} 28. Rf1 {[%clk 0:00:31.5]} 28... c5 {[%clk 0:00:17.5]} 29. b3 {[%clk 0:00:27.8]} 29... Kd4 {[%clk 0:00:13.2]} 30. Rh4+ {[%clk 0:00:26.7]} 30... Ke5 {[%clk 0:00:11.5]} 31. Re4+ {[%clk 0:00:26.2]} 31... Kd6 {[%clk 0:00:11.7]} 32. Ref4 {[%clk 0:00:26]} 32... Rh8 {[%clk 0:00:10.3]} 33. h4 {[%clk 0:00:25.8]} 33... Rg8 {[%clk 0:00:11]} 34. R1f3 {[%clk 0:00:25.1]} 34... Bd5 {[%clk 0:00:10.6]} 35. Be4 {[%clk 0:00:24.2]} 35... Bxe4 {[%clk 0:00:10]} 36. Rxe4 {[%clk 0:00:24.9]} 36... Rg7 {[%clk 0:00:08.4]} 37. Ref4 {[%clk 0:00:25.5]} 37... Ke7 {[%clk 0:00:08.7]} 38. Kd2 {[%clk 0:00:26.1]} 38... b6 {[%clk 0:00:09]} 39. Ke3 {[%clk 0:00:26.6]} 39... Ke6 {[%clk 0:00:05.1]} 40. c4 {[%clk 0:00:27]} 40... Ke5 {[%clk 0:00:05.4]} 41. Rxf7 {[%clk 0:00:26.6]} 41... Rg8 {[%clk 0:00:02.7]} 42. Re7+ {[%clk 0:00:24.9]} 42... Kd6 {[%clk 0:00:03.6]} 43. Rxa7 {[%clk 0:00:24.9]} 43... Re8+ {[%clk 0:00:02.9]} 44. Kf2 {[%clk 0:00:24.7]} 44... Ke5 {[%clk 0:00:04]} 45. Re3+ {[%clk 0:00:24.9]} 45... Kd4 {[%clk 0:00:03.6]} 46. Rxe8 {[%clk 0:00:24]} 46... b5 {[%clk 0:00:05.5]} 47. cxb5 {[%clk 0:00:24.3]} 47... Kc3 {[%clk 0:00:06.7]} 48. b6 {[%clk 0:00:23.5]} 48... Kxb3 {[%clk 0:00:07.7]} 49. b7 {[%clk 0:00:23.8]} 49... Ka2 {[%clk 0:00:07.6]} 50. Rc8 {[%clk 0:00:23.4]} 50... c4 {[%clk 0:00:08.9]} 51. Rxc4 {[%clk 0:00:23.1]} 51... Ka1 {[%clk 0:00:08.9]} 52. Rc2 {[%clk 0:00:23]} 52... Kb1 {[%clk 0:00:08.4]} 53. Re2 {[%clk 0:00:23.3]} 53... Ka1 {[%clk 0:00:09.3]} 54. a4 {[%clk 0:00:24]} 54... Kb1 {[%clk 0:00:08.5]} 55. a5 {[%clk 0:00:25.9]} 55... Ka1 {[%clk 0:00:10.1]} 56. a6 {[%clk 0:00:27.3]} 56... Kb1 {[%clk 0:00:11]} 57. g4 {[%clk 0:00:29.2]} 57... Ka1 {[%clk 0:00:12.4]} 58. h5 {[%clk 0:00:31.1]} 58... Kb1 {[%clk 0:00:13.9]} 59. g5 {[%clk 0:00:33]} 59... Ka1 {[%clk 0:00:15.7]} 60. h6 {[%clk 0:00:34.9]} 60... Kb1 {[%clk 0:00:17.3]} 61. g6 {[%clk 0:00:35.9]} 61... Ka1 {[%clk 0:00:19.1]} 62. h7 {[%clk 0:00:37]} 62... Kb1 {[%clk 0:00:19.8]} 63. g7 {[%clk 0:00:38.2]} 63... Ka1 {[%clk 0:00:21]} 64. Ra8 {[%clk 0:00:40.1]} 64... Kb1 {[%clk 0:00:21.1]} 65. a7 {[%clk 0:00:42]} 65... Ka1 {[%clk 0:00:22.4]} 66. Kf3 {[%clk 0:00:43.9]} 66... Kb1 {[%clk 0:00:22.7]} 67. h8=N {[%clk 0:00:44.9]} 67... Ka1 {[%clk 0:00:24.6]} 68. g8=N {[%clk 0:00:44.9]} 68... Kb1 {[%clk 0:00:26.4]} 69. Ng6 {[%clk 0:00:45.8]} 69... Ka1 {[%clk 0:00:28.3]} 70. Nh4 {[%clk 0:00:47]} 70... Kb1 {[%clk 0:00:29.9]} 71. Ng2 {[%clk 0:00:48]} 71... Ka1 {[%clk 0:00:31.8]} 72. Ne3 {[%clk 0:00:48.2]} 72... Kb1 {[%clk 0:00:33.6]} 73. Nf1 {[%clk 0:00:49.2]} 73... Ka1 {[%clk 0:00:35.4]} 74. Ng3 {[%clk 0:00:49.7]} 74... Kb1 {[%clk 0:00:37.3]} 75. Ne4 {[%clk 0:00:49.8]} 75... Ka1 {[%clk 0:00:39.2]} 76. Ngf6 {[%clk 0:00:48.9]} 76... Kb1 {[%clk 0:00:41.1]} 77. Ng4 {[%clk 0:00:50.1]} 77... Ka1 {[%clk 0:00:42.8]} 78. Nh2 {[%clk 0:00:48.6]} 78... Kb1 {[%clk 0:00:44.7]} 79. Nf1 {[%clk 0:00:49.4]} 79... Ka1 {[%clk 0:00:46.5]} 80. Ne3 {[%clk 0:00:49.4]} 80... Kb1 {[%clk 0:00:48.4]} 81. b8=B {[%clk 0:00:47.2]} 81... Ka1 {[%clk 0:00:50.3]} 82. Bc7 {[%clk 0:00:45.6]} 82... Kb1 {[%clk 0:00:52.1]} 83. Rh8 {[%clk 0:00:45.4]} 83... Ka1 {[%clk 0:00:51.2]} 84. a8=B {[%clk 0:00:45.1]} 84... Kb1 {[%clk 0:00:51.6]} 85. Nd6 {[%clk 0:00:45.1]} 85... Ka1 {[%clk 0:00:53.4]} 86. Be4 {[%clk 0:00:46]} 1/2-1/2\n",
+    "time_control": "180+2",
+    "end_time": 1785885314,
+    "rated": true,
+    "tcn": "mC0Kgv5QlBKBvBQBdB90cuZRbsYQB20T2wTKnDKTec7GuB6SBT!Tw2TCsC86CR65iqGI2KIKDK?!ow!Mde5Yft3VhfMKeKYRKN7?fT?8NVRKTfQIjrKBVFBKFCKRCD8?pF?!fvSJtCJCDC!2CDR0clXPlu0SkASKD12!10KR0W!8unRKvuKBu8PHAHBsHPsrPXri86IA6AiaAkabkmbaqyabyGbaGOabwEbaFNabEMbaNVabMUbaV3abU2baW4abOWbanvab3^ba2^ab?UbaUFabFobaouabufbafwabwCba!TabTEbaEpabpfbafuabX#ba5Yab4?baW#abCRba4C",
+    "uuid": "e5184282-9058-11f1-b9f6-9dd41a01000f",
+    "initial_setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+    "fen": "7R/2B5/3N4/8/4B3/4NK2/4R3/k7 b - - 4 86",
+    "time_class": "blitz",
+    "rules": "chess",
+    "white": {
+      "rating": 1562,
+      "result": "stalemate",
+      "@id": "https://api.chess.com/pub/player/chessicek",
+      "username": "chessicek",
+      "uuid": "0bd24d16-88d0-11e1-803b-000000000000"
+    },
+    "black": {
+      "rating": 1556,
+      "result": "stalemate",
+      "@id": "https://api.chess.com/pub/player/mustafacub",
+      "username": "MustafaCub",
+      "uuid": "4f97a586-4245-11eb-9f76-2fcdfe52e491"
+    },
+    "eco": "https://www.chess.com/openings/Scotch-Game-3...exd4-4.Nxd4-Nxd4-5.Qxd4"
+  },
+  {
     "url": "https://www.chess.com/game/live/172530024408",
     "pgn": "[Event \"Live Chess\"]\n[Site \"Chess.com\"]\n[Date \"2026.08.04\"]\n[Round \"-\"]\n[White \"AdorableSnowman\"]\n[Black \"chessicek\"]\n[Result \"1-0\"]\n[CurrentPosition \"8/5p2/6P1/bp3P2/6k1/4p3/4N3/3K4 b - - 0 51\"]\n[Timezone \"UTC\"]\n[ECO \"A54\"]\n[ECOUrl \"https://www.chess.com/openings/Old-Indian-Defense-Ukrainian-Variation-4.dxe5-dxe5-5.Qxd8-Kxd8-6.Bg5\"]\n[UTCDate \"2026.08.04\"]\n[UTCTime \"18:30:41\"]\n[WhiteElo \"1556\"]\n[BlackElo \"1562\"]\n[TimeControl \"180+2\"]\n[Termination \"AdorableSnowman won on time\"]\n[StartTime \"18:30:41\"]\n[EndDate \"2026.08.04\"]\n[EndTime \"18:39:46\"]\n[Link \"https://www.chess.com/game/live/172530024408\"]\n\n1. c4 {[%clk 0:03:01.8]} 1... d6 {[%clk 0:03:00.7]} 2. Nc3 {[%clk 0:03:03.3]} 2... Nf6 {[%clk 0:03:01.9]} 3. d4 {[%clk 0:03:04.9]} 3... e5 {[%clk 0:03:01.5]} 4. dxe5 {[%clk 0:03:05.5]} 4... dxe5 {[%clk 0:03:02.5]} 5. Qxd8+ {[%clk 0:03:06.8]} 5... Kxd8 {[%clk 0:03:04.4]} 6. Bg5 {[%clk 0:03:07.9]} 6... Be6 {[%clk 0:03:04.9]} 7. O-O-O+ {[%clk 0:03:05.5]} 7... Kc8 {[%clk 0:03:05.2]} 8. Bxf6 {[%clk 0:03:05.8]} 8... gxf6 {[%clk 0:03:05.8]} 9. e4 {[%clk 0:03:06.7]} 9... Nd7 {[%clk 0:03:05.1]} 10. g3 {[%clk 0:02:59.6]} 10... c6 {[%clk 0:03:00.3]} 11. Nge2 {[%clk 0:02:51.5]} 11... Kc7 {[%clk 0:02:54.6]} 12. Bg2 {[%clk 0:02:51.8]} 12... Bxc4 {[%clk 0:02:53.6]} 13. Rd2 {[%clk 0:02:43.3]} 13... Nc5 {[%clk 0:02:29.5]} 14. Rhd1 {[%clk 0:02:40]} 14... a5 {[%clk 0:02:14.3]} 15. b3 {[%clk 0:02:32.2]} 15... Be6 {[%clk 0:02:06.5]} 16. Kb2 {[%clk 0:02:27.3]} 16... Be7 {[%clk 0:01:51.6]} 17. f4 {[%clk 0:02:13.8]} 17... Bg4 {[%clk 0:01:51.2]} 18. h3 {[%clk 0:01:45.2]} 18... Bxe2 {[%clk 0:01:50.2]} 19. Nxe2 {[%clk 0:01:46.1]} 19... Rad8 {[%clk 0:01:46.2]} 20. f5 {[%clk 0:01:45.5]} 20... Rxd2+ {[%clk 0:01:36.2]} 21. Rxd2 {[%clk 0:01:47.4]} 21... Rd8 {[%clk 0:01:36.6]} 22. Rxd8 {[%clk 0:01:45.1]} 22... Kxd8 {[%clk 0:01:34]} 23. Kc3 {[%clk 0:01:35.5]} 23... Kc7 {[%clk 0:01:30.1]} 24. a3 {[%clk 0:01:36.4]} 24... b5 {[%clk 0:01:29.4]} 25. b4 {[%clk 0:01:36.9]} 25... axb4+ {[%clk 0:01:29.9]} 26. axb4 {[%clk 0:01:38.8]} 26... Na4+ {[%clk 0:01:30.1]} 27. Kb3 {[%clk 0:01:37.8]} 27... Nb6 {[%clk 0:01:30.3]} 28. Nc3 {[%clk 0:01:31.6]} 28... Nc4 {[%clk 0:01:29.1]} 29. Nb1 {[%clk 0:01:20.3]} 29... Ne3 {[%clk 0:01:22.3]} 30. Bf3 {[%clk 0:01:13.8]} 30... Nf1 {[%clk 0:01:03]} 31. g4 {[%clk 0:01:14.2]} 31... Ng3 {[%clk 0:01:00.6]} 32. Kc3 {[%clk 0:01:00.8]} 32... Kb6 {[%clk 0:00:58.1]} 33. Na3 {[%clk 0:01:01]} 33... c5 {[%clk 0:00:54.8]} 34. bxc5+ {[%clk 0:00:59.6]} 34... Kxc5 {[%clk 0:00:54.1]} 35. Nc2 {[%clk 0:01:01.5]} 35... Nf1 {[%clk 0:00:48.7]} 36. Be2 {[%clk 0:00:51.8]} 36... Ng3 {[%clk 0:00:45.6]} 37. Bf3 {[%clk 0:00:52.8]} 37... Bd8 {[%clk 0:00:42.1]} 38. Ne3 {[%clk 0:00:40]} 38... Ba5+ {[%clk 0:00:30.4]} 39. Kb3 {[%clk 0:00:34.7]} 39... Kd4 {[%clk 0:00:25.7]} 40. Nd5 {[%clk 0:00:33.3]} 40... Nxe4 {[%clk 0:00:24.8]} 41. Bxe4 {[%clk 0:00:32.6]} 41... Kxe4 {[%clk 0:00:25.2]} 42. Nxf6+ {[%clk 0:00:34.2]} 42... Kf4 {[%clk 0:00:26.1]} 43. Nxh7 {[%clk 0:00:35.9]} 43... e4 {[%clk 0:00:26.7]} 44. Kc2 {[%clk 0:00:34.1]} 44... e3 {[%clk 0:00:25.1]} 45. Kd1 {[%clk 0:00:34.7]} 45... Kf3 {[%clk 0:00:21.3]} 46. Ng5+ {[%clk 0:00:35.6]} 46... Kf2 {[%clk 0:00:22.5]} 47. Ne4+ {[%clk 0:00:34.2]} 47... Kf1 {[%clk 0:00:20.9]} 48. Ng3+ {[%clk 0:00:33.4]} 48... Kg2 {[%clk 0:00:20.5]} 49. Ne2 {[%clk 0:00:34.7]} 49... Kxh3 {[%clk 0:00:20.6]} 50. g5 {[%clk 0:00:36.3]} 50... Kg4 {[%clk 0:00:21.3]} 51. g6 {[%clk 0:00:37.4]} 1-0\n",
     "time_control": "180+2",
@@ -582,37 +610,5 @@
       "uuid": "0bd24d16-88d0-11e1-803b-000000000000"
     },
     "eco": "https://www.chess.com/openings/Queens-Pawn-Opening-Tartakower-Variation"
-  },
-  {
-    "url": "https://www.chess.com/game/live/172425146740",
-    "pgn": "[Event \"Live Chess\"]\n[Site \"Chess.com\"]\n[Date \"2026.08.02\"]\n[Round \"-\"]\n[White \"chessicek\"]\n[Black \"Rusff76\"]\n[Result \"0-1\"]\n[CurrentPosition \"r3r1k1/pp3ppp/n5q1/2pPnQB1/4N3/P7/1P4PP/R4RK1 w - - 2 21\"]\n[Timezone \"UTC\"]\n[ECO \"B12\"]\n[ECOUrl \"https://www.chess.com/openings/Caro-Kann-Defense-Fantasy-Variation-3...dxe4-4.fxe4\"]\n[UTCDate \"2026.08.02\"]\n[UTCTime \"13:13:14\"]\n[WhiteElo \"1562\"]\n[BlackElo \"1581\"]\n[TimeControl \"180+2\"]\n[Termination \"Rusff76 won by resignation\"]\n[StartTime \"13:13:14\"]\n[EndDate \"2026.08.02\"]\n[EndTime \"13:16:10\"]\n[Link \"https://www.chess.com/game/live/172425146740\"]\n\n1. e4 {[%clk 0:03:01.7]} 1... c6 {[%clk 0:03:00.6]} 2. d4 {[%clk 0:03:01.9]} 2... d5 {[%clk 0:03:02.5]} 3. f3 {[%clk 0:03:02.8]} 3... dxe4 {[%clk 0:03:02.4]} 4. fxe4 {[%clk 0:03:04.7]} 4... Nf6 {[%clk 0:03:04]} 5. e5 {[%clk 0:03:04.7]} 5... Bg4 {[%clk 0:03:05.2]} 6. Be2 {[%clk 0:03:03.1]} 6... Bxe2 {[%clk 0:03:05.9]} 7. Qxe2 {[%clk 0:03:02.5]} 7... Nd5 {[%clk 0:03:07.8]} 8. c4 {[%clk 0:03:02.5]} 8... Nb4 {[%clk 0:03:08.7]} 9. Nf3 {[%clk 0:03:02.5]} 9... e6 {[%clk 0:03:09.3]} 10. a3 {[%clk 0:03:01.4]} 10... N4a6 {[%clk 0:03:09.5]} 11. Nc3 {[%clk 0:03:02.3]} 11... Nd7 {[%clk 0:03:09.4]} 12. Be3 {[%clk 0:03:02.2]} 12... Be7 {[%clk 0:03:09.5]} 13. O-O {[%clk 0:03:02.5]} 13... O-O {[%clk 0:03:10.1]} 14. Ne4 {[%clk 0:03:02.1]} 14... c5 {[%clk 0:03:08.9]} 15. d5 {[%clk 0:02:58.3]} 15... exd5 {[%clk 0:03:09.9]} 16. cxd5 {[%clk 0:02:59]} 16... Re8 {[%clk 0:02:58.4]} 17. Nfg5 {[%clk 0:02:49.9]} 17... Bxg5 {[%clk 0:02:56]} 18. Bxg5 {[%clk 0:02:48.2]} 18... Qb6 {[%clk 0:02:45.4]} 19. Qf3 {[%clk 0:02:23.9]} 19... Nxe5 {[%clk 0:02:42.4]} 20. Qf5 {[%clk 0:02:23.1]} 20... Qg6 {[%clk 0:02:36]} 0-1\n",
-    "time_control": "180+2",
-    "end_time": 1785676570,
-    "rated": true,
-    "accuracies": {
-      "white": 81.74,
-      "black": 82.97
-    },
-    "tcn": "mCYQlBZJnvJCvC!TCK6EfmEmdmTJkAJzgv0SiqzObs5Zcu90eg8!sCQIBJSJAJ98vM0MuM7PmvZKvLPU",
-    "uuid": "eb8597a8-8e73-11f1-8ad2-0100ee01000f",
-    "initial_setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
-    "fen": "r3r1k1/pp3ppp/n5q1/2pPnQB1/4N3/P7/1P4PP/R4RK1 w - - 2 21",
-    "time_class": "blitz",
-    "rules": "chess",
-    "white": {
-      "rating": 1562,
-      "result": "resigned",
-      "@id": "https://api.chess.com/pub/player/chessicek",
-      "username": "chessicek",
-      "uuid": "0bd24d16-88d0-11e1-803b-000000000000"
-    },
-    "black": {
-      "rating": 1581,
-      "result": "win",
-      "@id": "https://api.chess.com/pub/player/rusff76",
-      "username": "Rusff76",
-      "uuid": "3d41af80-711f-11e7-8020-000000000000"
-    },
-    "eco": "https://www.chess.com/openings/Caro-Kann-Defense-Fantasy-Variation-3...dxe4-4.fxe4"
   }
 ]
