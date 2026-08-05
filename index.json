@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "username": "Chessicek",
-  "last_updated": "2026-08-05T06:40:28.860685Z",
+  "last_updated": "2026-08-05T09:47:52.370652Z",
   "latest_game": {
-    "end_time": "2026-08-05T06:09:34Z",
+    "end_time": "2026-08-05T08:29:26Z",
     "date": "2026.08.05",
-    "white": "lilia-walid",
-    "white_rating": 1547,
+    "white": "platonni",
+    "white_rating": 1634,
     "black": "chessicek",
-    "black_rating": 1547,
+    "black_rating": 1541,
     "result": "1-0",
     "user_colour": "Black",
     "user_result": "Loss",
@@ -16,7 +16,7 @@
     "time_control": "180+2",
     "rated": true,
     "opening": "Pirc Defense Modern Defense Geller System...3.Nc3 e5 4.Bc4 Be7",
-    "url": "https://www.chess.com/game/live/172548980312",
+    "url": "https://www.chess.com/game/live/172552789832",
     "pgn": "games/latest.pgn"
   },
   "latest_na3": {
