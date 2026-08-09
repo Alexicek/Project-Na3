@@ -1,22 +1,22 @@
 {
   "schema_version": 1,
   "username": "Chessicek",
-  "last_updated": "2026-08-09T13:58:37.882350Z",
+  "last_updated": "2026-08-09T14:51:16.426184Z",
   "latest_game": {
-    "end_time": "2026-08-09T13:49:25Z",
+    "end_time": "2026-08-09T14:44:08Z",
     "date": "2026.08.09",
     "white": "chessicek",
     "white_rating": 1644,
-    "black": "Caveman91",
-    "black_rating": 1655,
+    "black": "Tassadar95",
+    "black_rating": 1662,
     "result": "0-1",
     "user_colour": "White",
     "user_result": "Loss",
     "time_class": "blitz",
     "time_control": "180+2",
     "rated": true,
-    "opening": "Philidor Defense Exchange Variation 4.Nxd4 Nf6 5.Nc3 Be7 6.Bc4",
-    "url": "https://www.chess.com/game/live/172748771038",
+    "opening": "Four Knights Game Scotch Variation Accepted 5.Nxd4 Bb4 6.Nxc6 bxc6",
+    "url": "https://www.chess.com/game/live/172751184492",
     "pgn": "games/latest.pgn"
   },
   "latest_na3": {
