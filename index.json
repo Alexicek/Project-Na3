@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "username": "Chessicek",
-  "last_updated": "2026-08-11T06:02:58.328098Z",
+  "last_updated": "2026-08-11T07:35:07.308353Z",
   "latest_game": {
-    "end_time": "2026-08-11T06:02:26Z",
+    "end_time": "2026-08-11T06:50:35Z",
     "date": "2026.08.11",
-    "white": "Eric1025",
-    "white_rating": 1609,
+    "white": "nut_samuraia",
+    "white_rating": 1651,
     "black": "chessicek",
     "black_rating": 1646,
     "result": "0-1",
@@ -15,8 +15,8 @@
     "time_class": "blitz",
     "time_control": "180+2",
     "rated": true,
-    "opening": "Queens Pawn Opening English Rat Defense...4.Qxd8 Kxd8 5.Nc3 Be6",
-    "url": "https://www.chess.com/game/live/172825837212",
+    "opening": "Pirc Defense...6.Bg5 Be6 7.O O O Nd7 8.Nf3",
+    "url": "https://www.chess.com/game/live/172827149186",
     "pgn": "games/latest.pgn"
   },
   "latest_na3": {
