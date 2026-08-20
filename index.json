@@ -1,31 +1,31 @@
 {
   "schema_version": 1,
   "username": "Chessicek",
-  "last_updated": "2026-08-19T23:34:53.177760Z",
+  "last_updated": "2026-08-20T01:50:15.116626Z",
   "latest_game": {
-    "end_time": "2026-08-19T23:11:24Z",
+    "end_time": "2026-08-20T00:02:46Z",
     "date": "2026.08.19",
-    "white": "araymo888",
-    "white_rating": 1705,
+    "white": "elsigiloso",
+    "white_rating": 1797,
     "black": "chessicek",
-    "black_rating": 1703,
+    "black_rating": 1688,
     "result": "1-0",
     "user_colour": "Black",
     "user_result": "Loss",
     "time_class": "blitz",
     "time_control": "180+2",
     "rated": true,
-    "opening": "Pirc Defense...6.Bg5 Be6 7.O O O Nd7",
-    "url": "https://www.chess.com/game/live/173242188928",
+    "opening": "Alekhines Defense Normal Variation 3.d4",
+    "url": "https://www.chess.com/game/live/173243439606",
     "pgn": "games/latest.pgn"
   },
   "latest_na3": {
-    "end_time": "2026-08-18T22:04:51Z",
-    "date": "2026.08.18",
+    "end_time": "2026-08-19T23:40:07Z",
+    "date": "2026.08.19",
     "white": "chessicek",
-    "white_rating": 1711,
-    "black": "oMineman",
-    "black_rating": 1719,
+    "white_rating": 1694,
+    "black": "cosmicdetonator",
+    "black_rating": 1686,
     "result": "0-1",
     "user_colour": "White",
     "user_result": "Loss",
@@ -33,12 +33,12 @@
     "time_control": "180+2",
     "rated": true,
     "opening": "Sicilian Defense Kronberger Variation",
-    "url": "https://www.chess.com/game/live/173191643488",
+    "url": "https://www.chess.com/game/live/173242952114",
     "pgn": "na3/latest_na3.pgn"
   },
   "counts": {
     "recent_games": 20,
-    "recent_na3_games": 45
+    "recent_na3_games": 46
   },
   "files": {
     "recent_games_json": "games/latest.json",
