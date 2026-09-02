@@ -1,5 +1,37 @@
 [
   {
+    "end_time": "2026-09-02T12:19:17Z",
+    "date": "2026.09.02",
+    "white": "chessicek",
+    "white_rating": 1754,
+    "black": "AI_Killerz",
+    "black_rating": 1767,
+    "result": "0-1",
+    "user_colour": "White",
+    "user_result": "Loss",
+    "time_class": "blitz",
+    "time_control": "180+2",
+    "rated": true,
+    "opening": "Sicilian Defense Kronberger Variation 2...Nc6 3.Bb5",
+    "url": "https://www.chess.com/game/live/173885952982"
+  },
+  {
+    "end_time": "2026-09-02T12:00:31Z",
+    "date": "2026.09.02",
+    "white": "chessicek",
+    "white_rating": 1762,
+    "black": "marcosseixas",
+    "black_rating": 1748,
+    "result": "1-0",
+    "user_colour": "White",
+    "user_result": "Win",
+    "time_class": "blitz",
+    "time_control": "180+2",
+    "rated": true,
+    "opening": "Sicilian Defense Kronberger Variation",
+    "url": "https://www.chess.com/game/live/173885280710"
+  },
+  {
     "end_time": "2026-08-31T20:09:47Z",
     "date": "2026.08.31",
     "white": "chessicek",
