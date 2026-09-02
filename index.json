@@ -1,31 +1,31 @@
 {
   "schema_version": 1,
   "username": "Chessicek",
-  "last_updated": "2026-09-02T14:27:56.153904Z",
+  "last_updated": "2026-09-02T18:40:49.769448Z",
   "latest_game": {
-    "end_time": "2026-09-02T12:46:47Z",
+    "end_time": "2026-09-02T18:30:15Z",
     "date": "2026.09.02",
-    "white": "georgefarman20",
-    "white_rating": 1736,
+    "white": "ownage249697",
+    "white_rating": 1729,
     "black": "chessicek",
     "black_rating": 1754,
-    "result": "1/2-1/2",
+    "result": "1-0",
     "user_colour": "Black",
-    "user_result": "Draw",
+    "user_result": "Loss",
     "time_class": "blitz",
     "time_control": "180+2",
     "rated": true,
-    "opening": "Queens Pawn Opening Tartakower Variation 2...Nd7",
-    "url": "https://www.chess.com/game/live/173886764640",
+    "opening": "Queens Pawn Opening English Rat Defense...4.Qxd8 Kxd8 5.Nc3 Be6",
+    "url": "https://www.chess.com/game/live/173902127968",
     "pgn": "games/latest.pgn"
   },
   "latest_na3": {
-    "end_time": "2026-09-02T12:19:17Z",
+    "end_time": "2026-09-02T17:15:50Z",
     "date": "2026.09.02",
     "white": "chessicek",
-    "white_rating": 1754,
-    "black": "AI_Killerz",
-    "black_rating": 1767,
+    "white_rating": 1762,
+    "black": "blueezz",
+    "black_rating": 1782,
     "result": "0-1",
     "user_colour": "White",
     "user_result": "Loss",
@@ -33,12 +33,12 @@
     "time_control": "180+2",
     "rated": true,
     "opening": "Sicilian Defense Kronberger Variation 2...Nc6 3.Bb5",
-    "url": "https://www.chess.com/game/live/173885952982",
+    "url": "https://www.chess.com/game/live/173898933484",
     "pgn": "na3/latest_na3.pgn"
   },
   "counts": {
     "recent_games": 20,
-    "recent_na3_games": 58
+    "recent_na3_games": 59
   },
   "files": {
     "recent_games_json": "games/latest.json",
