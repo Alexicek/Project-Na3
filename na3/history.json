@@ -1,5 +1,21 @@
 [
   {
+    "end_time": "2026-09-08T08:03:06Z",
+    "date": "2026.09.08",
+    "white": "chessicek",
+    "white_rating": 1585,
+    "black": "Fernando101018",
+    "black_rating": 1572,
+    "result": "1-0",
+    "user_colour": "White",
+    "user_result": "Win",
+    "time_class": "bullet",
+    "time_control": "120+1",
+    "rated": true,
+    "opening": "Sicilian Defense Kronberger Variation",
+    "url": "https://www.chess.com/game/live/174163612928"
+  },
+  {
     "end_time": "2026-09-06T05:58:37Z",
     "date": "2026.09.06",
     "white": "chessicek",
