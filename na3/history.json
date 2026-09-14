@@ -1,5 +1,21 @@
 [
   {
+    "end_time": "2026-09-13T23:18:55Z",
+    "date": "2026.09.13",
+    "white": "chessicek",
+    "white_rating": 1532,
+    "black": "alibraveee",
+    "black_rating": 1546,
+    "result": "0-1",
+    "user_colour": "White",
+    "user_result": "Loss",
+    "time_class": "bullet",
+    "time_control": "120+1",
+    "rated": true,
+    "opening": "Sicilian Defense Kronberger Variation 2...Nc6 3.Bb5",
+    "url": "https://www.chess.com/game/live/174439339858"
+  },
+  {
     "end_time": "2026-09-13T06:28:37Z",
     "date": "2026.09.13",
     "white": "chessicek",
