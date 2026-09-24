@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "username": "Chessicek",
-  "last_updated": "2026-09-24T19:08:13.663209Z",
+  "last_updated": "2026-09-24T22:22:20.820432Z",
   "latest_game": {
-    "end_time": "2026-09-24T18:28:51Z",
+    "end_time": "2026-09-24T20:40:16Z",
     "date": "2026.09.24",
-    "white": "mazumderrajat",
-    "white_rating": 1435,
+    "white": "M4tt4ck",
+    "white_rating": 1399,
     "black": "chessicek",
-    "black_rating": 1396,
+    "black_rating": 1388,
     "result": "1-0",
     "user_colour": "Black",
     "user_result": "Loss",
@@ -16,7 +16,7 @@
     "time_control": "120+1",
     "rated": true,
     "opening": "Kings Pawn Opening",
-    "url": "https://www.chess.com/game/live/184319841918",
+    "url": "https://www.chess.com/game/live/184325217480",
     "pgn": "games/latest.pgn"
   },
   "latest_na3": {
