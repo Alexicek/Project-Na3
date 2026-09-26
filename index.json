@@ -1,22 +1,22 @@
 {
   "schema_version": 1,
   "username": "Chessicek",
-  "last_updated": "2026-09-26T13:03:36.078902Z",
+  "last_updated": "2026-09-26T17:08:35.457988Z",
   "latest_game": {
-    "end_time": "2026-09-26T11:24:56Z",
+    "end_time": "2026-09-26T17:08:12Z",
     "date": "2026.09.26",
     "white": "chessicek",
     "white_rating": 1353,
-    "black": "FreakHead86",
-    "black_rating": 1475,
+    "black": "Roggan2104",
+    "black_rating": 1390,
     "result": "0-1",
     "user_colour": "White",
     "user_result": "Loss",
     "time_class": "bullet",
     "time_control": "120+1",
     "rated": true,
-    "opening": "Alekhines Defense",
-    "url": "https://www.chess.com/game/live/184400048648",
+    "opening": "Undefined",
+    "url": "https://www.chess.com/game/live/184414896018",
     "pgn": "games/latest.pgn"
   },
   "latest_na3": {
