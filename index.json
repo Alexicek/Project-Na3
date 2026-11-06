@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "username": "Chessicek",
-  "last_updated": "2026-11-06T06:42:09.478399Z",
+  "last_updated": "2026-11-06T14:59:57.374817Z",
   "latest_game": {
-    "end_time": "2026-11-05T22:21:44Z",
-    "date": "2026.11.05",
-    "white": "Barnstorming",
-    "white_rating": 1220,
+    "end_time": "2026-11-06T13:04:39Z",
+    "date": "2026.11.06",
+    "white": "Umairahmadmr",
+    "white_rating": 1221,
     "black": "chessicek",
-    "black_rating": 1220,
+    "black_rating": 1212,
     "result": "1-0",
     "user_colour": "Black",
     "user_result": "Loss",
@@ -16,7 +16,7 @@
     "time_control": "120+1",
     "rated": true,
     "opening": "Queens Pawn Opening",
-    "url": "https://www.chess.com/game/live/186617600334",
+    "url": "https://www.chess.com/game/live/186651078720",
     "pgn": "games/latest.pgn"
   },
   "latest_na3": {
