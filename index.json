@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "username": "Chessicek",
-  "last_updated": "2026-11-13T07:54:12.910353Z",
+  "last_updated": "2026-11-13T16:18:01.133504Z",
   "latest_game": {
-    "end_time": "2026-11-13T06:45:17Z",
+    "end_time": "2026-11-13T13:11:47Z",
     "date": "2026.11.13",
     "white": "chessicek",
-    "white_rating": 1229,
-    "black": "edward555",
-    "black_rating": 1154,
+    "white_rating": 1228,
+    "black": "Abdenourhas",
+    "black_rating": 1192,
     "result": "1-0",
     "user_colour": "White",
     "user_result": "Win",
@@ -16,7 +16,7 @@
     "time_control": "120+1",
     "rated": true,
     "opening": "Undefined",
-    "url": "https://www.chess.com/game/live/187103254286",
+    "url": "https://www.chess.com/game/live/187122095830",
     "pgn": "games/latest.pgn"
   },
   "latest_na3": {
